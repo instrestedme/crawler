@@ -1,0 +1,44 @@
+# http 监听的地址
+http:
+  host:
+  port: 9090
+
+crawl:
+  spec: "0 0 0 */1 * *"
+  # 抓取提留时间，避免被封 IP，支持 Duration 格式，比如 20s
+  sleep: 10
+  schema: https
+  website: fudao.qq.com
+  gradeSubject:
+    url: cgi-proxy/course/grade_subject
+    referer: "https://fudao.qq.com/subject/%d/"
+  getCourses:
+    url: cgi-proxy/course/discover_subject
+    client: 4
+    platform: 3
+    version: 30
+    showid: 0
+    size: 10
+  getSysCourses:
+    url: cgi-proxy/course/get_course_package_info
+    referer: "https://fudao.qq.com/subject/6002/subject_system/%s"
+    client: 4
+    platform: 3
+    version: 30
+    showid: 0
+    size: 10
+
+worker:
+  parallel: 1
+
+storage:
+  driver: mysql
+  user: root
+  password:
+  host: localhost
+  port: 3306
+  dbname: crawler
+  charset: utf8mb4
+
+requestHeader:
+  cookie: pgv_pvi=8744998912; pgv_pvid=1646310558; pgv_si=s9779391488; _qpsvr_localtk=0.4786727496728649; onliner_zdfq72219600=0
